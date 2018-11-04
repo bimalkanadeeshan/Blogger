@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -23,12 +24,11 @@ public class BlogController {
         return blogService.save(blog);
     }
 
-/*
-    @RequestMapping("/blog/{id}")
-    public Blog findOneBlog(@PathVariable int id) {
-        return blogService.findOneBlog(id);
+    @RequestMapping("/blog/{bid}")
+    public Optional<Blog> findOneBlog(@PathVariable int bid) {
+        return blogService.findOne(bid);
     }
-
+/*
     @RequestMapping(method = RequestMethod.DELETE, value= "/blog/{id}")
     public void deleteBlog(@PathVariable int id) {
         blogService.deleteBlog(id);

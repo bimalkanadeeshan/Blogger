@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BlogServiceImp implements BlogService {
@@ -22,5 +23,10 @@ public class BlogServiceImp implements BlogService {
     @Override
     public Blog save(Blog blog) {
         return blogRepository.save(blog);
+    }
+
+    @Override
+    public Optional<Blog> findOne(int bid) {
+        return blogRepository.findById(bid);
     }
 }
