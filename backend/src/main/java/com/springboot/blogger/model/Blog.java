@@ -8,25 +8,25 @@ public class Blog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int bid;
     private String title;
     private String content;
 
     public Blog() {
     }
 
-    public Blog(int id, String title, String content) {
-        this.id = id;
+    public Blog(int bid, String title, String content) {
+        this.bid = bid;
         this.title = title;
         this.content = content;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int bid) {
+        this.bid = bid;
     }
 
     public int getId() {
-        return id;
+        return bid;
     }
 
     public String getTitle() {
