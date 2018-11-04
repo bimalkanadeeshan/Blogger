@@ -4,5 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 //import org.springframework.data.repository.query.Param;
 
 public interface BlogRepository extends JpaRepository<Blog, Integer> {
-    Blog findByIds(Integer id);
+    //Blog findByIds(Integer id);
 }
