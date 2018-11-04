@@ -28,9 +28,9 @@ public class BlogController {
     public Optional<Blog> findOneBlog(@PathVariable int bid) {
         return blogService.findOne(bid);
     }
-/*
-    @RequestMapping(method = RequestMethod.DELETE, value= "/blog/{id}")
-    public void deleteBlog(@PathVariable int id) {
-        blogService.deleteBlog(id);
-    }*/
+
+    @RequestMapping(method = RequestMethod.DELETE, value= "/blog/{bid}")
+    public void deleteBlog(@PathVariable int bid) {
+        blogService.delete(bid);
+    }
 }

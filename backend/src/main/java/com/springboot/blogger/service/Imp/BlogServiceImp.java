@@ -29,4 +29,9 @@ public class BlogServiceImp implements BlogService {
     public Optional<Blog> findOne(int bid) {
         return blogRepository.findById(bid);
     }
+
+    @Override
+    public void delete(int bid) {
+        blogRepository.deleteById(bid);
+    }
 }
