@@ -7,7 +7,8 @@ import java.util.Optional;
 
 public interface BlogService {
     List<Blog> findAll();
+    Optional<Blog> findOne(int bid);
     Blog save(Blog blog);
     void delete(int bid);
-    Optional<Blog> findOne(int bid);
+    void edit(Blog blog, int bid);
 }

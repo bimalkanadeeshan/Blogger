@@ -33,4 +33,14 @@ public class BlogController {
     public void deleteBlog(@PathVariable int bid) {
         blogService.delete(bid);
     }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/blog/{bid}")
+    public void editBlog(@RequestBody Blog blog, @PathVariable int bid) {
+        Blog bl =  blogService.findOne(bid).get();
+        if(bl != null) {
+            bl.setTitle(blog.getTitle());
+            bl.setContent(blog.getContent());
+            blogService.edit(bl, bid);
+        }
+    }
 }

@@ -34,4 +34,9 @@ public class BlogServiceImp implements BlogService {
     public void delete(int bid) {
         blogRepository.deleteById(bid);
     }
+
+    @Override
+    public void edit(Blog blog,int bid) {
+        blogRepository.save(blog);
+    }
 }
