@@ -17,7 +17,7 @@ public class BlogService {
         return blogrepository.save(blog);
     }
 
-    //return all blogs
+    //return all bl ogs
     public List<Blog> findAll() {
         return blogrepository.findAll();
     }
