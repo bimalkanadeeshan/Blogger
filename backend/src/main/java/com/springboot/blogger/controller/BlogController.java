@@ -46,7 +46,7 @@ public class BlogController {
     }
 
     @RequestMapping("/blog/user/{uid}")
-    public List<Blog> findAllBlogByUser(@PathVariable String uid) {
+    public List<Blog> findAllBlogByUser(@PathVariable long uid) {
         return blogService.findAllBlogByUser(uid);
     }
 }

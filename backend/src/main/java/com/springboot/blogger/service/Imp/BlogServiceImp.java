@@ -16,8 +16,8 @@ public class BlogServiceImp implements BlogService {
     private BlogRepository blogRepository;
 
     @Override
-    public List<Blog> findAllBlogByUser(String uid) {
-        return blogRepository.findByUserName(uid);
+    public List<Blog> findAllBlogByUser(long uid) {
+        return blogRepository.findByUserUid(uid);
     }
 
     @Override

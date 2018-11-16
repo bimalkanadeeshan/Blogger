@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BlogService {
-    List<Blog> findAllBlogByUser(String uid);
+    List<Blog> findAllBlogByUser(long uid);
 
     List<Blog> findAll();
     Optional<Blog> findOne(int bid);
