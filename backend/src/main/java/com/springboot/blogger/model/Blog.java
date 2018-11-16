@@ -1,5 +1,7 @@
 package com.springboot.blogger.model;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="blog")
@@ -11,6 +13,13 @@ public class Blog {
     private int bid;
     private String title;
     private String content;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToMany(mappedBy = "blog")
+    private List<Reviewer> reviewer;
 
     public Blog() {
     }
@@ -45,4 +54,19 @@ public class Blog {
         this.content = content;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Reviewer> getReviewer() {
+        return reviewer;
+    }
+
+    public void setReviewer(List<Reviewer> reviewer) {
+        this.reviewer = reviewer;
+    }
 }
