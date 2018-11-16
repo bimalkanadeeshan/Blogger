@@ -1,7 +1,9 @@
 package com.springboot.blogger.model;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.core.GrantedAuthority;
+//import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,7 +12,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "user")
-public class User implements UserDetails {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long uid;
@@ -22,7 +24,8 @@ public class User implements UserDetails {
     private String password;
     private boolean enabled;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Blog> blog;
 
     public User() {
@@ -78,6 +81,7 @@ public class User implements UserDetails {
     public void setBlog(List<Blog> blog) {
         this.blog = blog;
     }
+    /*
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -99,4 +103,5 @@ public class User implements UserDetails {
     public boolean isCredentialsNonExpired() {
         return true;
     }
+    */
 }

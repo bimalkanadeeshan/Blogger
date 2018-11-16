@@ -1,5 +1,7 @@
 package com.springboot.blogger.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,8 +16,9 @@ public class Blog {
     private String title;
     private String content;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_id")
+
     private User user;
 
     @ManyToMany(mappedBy = "blog")
@@ -24,10 +27,11 @@ public class Blog {
     public Blog() {
     }
 
-    public Blog(int bid, String title, String content) {
+    public Blog(int bid, String title, String content, User user) {
         this.bid = bid;
         this.title = title;
         this.content = content;
+        this.user = user;
     }
 
     public void setId(int bid) {
