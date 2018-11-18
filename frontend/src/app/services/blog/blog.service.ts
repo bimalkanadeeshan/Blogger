@@ -9,6 +9,6 @@ export class BlogService {
   constructor(private http: HttpClient) { }
 
   public showAllBlogs() {
-    return this.http.get('blog');
+    return this.http.get('/api/blog');
   }
 }

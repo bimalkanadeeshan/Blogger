@@ -13,7 +13,7 @@ export class BlogComponent implements OnInit {
     this.blogService.showAllBlogs()
     .subscribe((blog) => {
       this.blog = blog;
-      console.log(this.blog);
+      console.log(blog);
     });
   }
 
