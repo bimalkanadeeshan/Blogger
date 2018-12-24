@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ReviewerServiceImp implements ReviewerService {
@@ -17,6 +18,11 @@ public class ReviewerServiceImp implements ReviewerService {
     @Override
     public List<Reviewer> findAll() {
         return reviewerRepository.findAll();
+    }
+
+    @Override
+    public Optional<Reviewer> findById(int id) {
+        return reviewerRepository.findById(id);
     }
 }
 
