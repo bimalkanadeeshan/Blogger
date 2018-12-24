@@ -34,4 +34,15 @@ public class ReviewerController {
   public void deleteReviewer(@PathVariable int id) {
       reviewerService.delete(id);
   }
+
+  @RequestMapping(method = RequestMethod.PUT, value = "/reviewers/{id}")
+  public void editReeviewer(@RequestBody Reviewer reviewer, @PathVariable int id) {
+      Reviewer r = reviewerService.findById(id).get();
+      if(r != null) {
+          r.setName(reviewer.getName());
+          r.setOrganization(reviewer.getOrganization());
+          r.setPosition(reviewer.getPosition());
+          reviewerService.edit(r);
+      }
+  }
 }

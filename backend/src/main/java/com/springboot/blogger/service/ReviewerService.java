@@ -9,5 +9,6 @@ public interface ReviewerService {
     List<Reviewer> findAll();
     Optional<Reviewer> findById(int id);
     void save(Reviewer reviewer);
+    void edit(Reviewer reviewer);
     void delete(int id);
 }
