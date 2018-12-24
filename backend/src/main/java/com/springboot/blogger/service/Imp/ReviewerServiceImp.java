@@ -24,5 +24,10 @@ public class ReviewerServiceImp implements ReviewerService {
     public Optional<Reviewer> findById(int id) {
         return reviewerRepository.findById(id);
     }
+
+    @Override
+    public void save(Reviewer reviewer) {
+        reviewerRepository.save(reviewer);
+    }
 }
 

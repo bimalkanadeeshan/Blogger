@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface ReviewerService {
     List<Reviewer> findAll();
     Optional<Reviewer> findById(int id);
+    void save(Reviewer reviewer);
 }

@@ -3,9 +3,7 @@ package com.springboot.blogger.controller;
 import com.springboot.blogger.model.Reviewer;
 import com.springboot.blogger.service.ReviewerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,5 +23,10 @@ public class ReviewerController {
   @RequestMapping("/reviewers/{id}")
   public Optional<Reviewer> findReviewer(@PathVariable int id) {
       return reviewerService.findById(id);
+  }
+
+  @RequestMapping(method=RequestMethod.POST,value="/reviewers")
+  public void saveReviewer(@RequestBody Reviewer reviewer){
+      reviewerService.save(reviewer);
   }
 }
