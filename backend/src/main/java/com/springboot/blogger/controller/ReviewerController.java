@@ -36,7 +36,7 @@ public class ReviewerController {
   }
 
   @RequestMapping(method = RequestMethod.PUT, value = "/reviewers/{id}")
-  public void editReeviewer(@RequestBody Reviewer reviewer, @PathVariable int id) {
+  public void editReviewer(@RequestBody Reviewer reviewer, @PathVariable int id) {
       Reviewer r = reviewerService.findById(id).get();
       if(r != null) {
           r.setName(reviewer.getName());
