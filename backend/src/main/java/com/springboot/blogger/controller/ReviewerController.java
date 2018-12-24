@@ -29,4 +29,9 @@ public class ReviewerController {
   public void saveReviewer(@RequestBody Reviewer reviewer){
       reviewerService.save(reviewer);
   }
+
+  @RequestMapping(method = RequestMethod.DELETE, value = "/reviewers/{id}")
+  public void deleteReviewer(@PathVariable int id) {
+      reviewerService.delete(id);
+  }
 }

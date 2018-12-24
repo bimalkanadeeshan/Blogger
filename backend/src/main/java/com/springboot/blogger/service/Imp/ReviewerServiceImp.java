@@ -29,5 +29,10 @@ public class ReviewerServiceImp implements ReviewerService {
     public void save(Reviewer reviewer) {
         reviewerRepository.save(reviewer);
     }
+
+    @Override
+    public void delete(int id) {
+        reviewerRepository.deleteById(id);
+    }
 }
 
