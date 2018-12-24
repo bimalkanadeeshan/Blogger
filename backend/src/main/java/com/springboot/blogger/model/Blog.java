@@ -1,7 +1,5 @@
 package com.springboot.blogger.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -18,7 +16,6 @@ public class Blog {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-
     private User user;
 
     @ManyToMany(mappedBy = "blog")

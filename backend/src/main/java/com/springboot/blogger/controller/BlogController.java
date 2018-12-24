@@ -1,6 +1,5 @@
 package com.springboot.blogger.controller;
 import com.springboot.blogger.model.Blog;
-import com.springboot.blogger.model.User;
 import com.springboot.blogger.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
