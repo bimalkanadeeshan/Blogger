@@ -11,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "user")
-public class User implements UserDetails {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long uid;
@@ -21,7 +21,6 @@ public class User implements UserDetails {
 
     private String name;
     private String password;
-    private boolean enabled;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
@@ -30,11 +29,10 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String username, String name, String password, boolean enabled) {
+    public User(String username, String name, String password) {
         this.username = username;
         this.name = name;
         this.password = password;
-        this.enabled = enabled;
     }
 
     public Long getUid() {
@@ -49,8 +47,8 @@ public class User implements UserDetails {
         return username;
     }
 
-    public void setUsername(String email) {
-        this.username = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getName() {
@@ -69,10 +67,6 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public boolean isEnabled() {
-        return enabled;
-    }
-
     public List<Blog> getBlog() {
         return blog;
     }
@@ -80,7 +74,7 @@ public class User implements UserDetails {
     public void setBlog(List<Blog> blog) {
         this.blog = blog;
     }
-
+/*
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
@@ -101,5 +95,5 @@ public class User implements UserDetails {
     public boolean isCredentialsNonExpired() {
         return true;
     }
-
+*/
 }
