@@ -38,6 +38,11 @@ public class UserController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         final User u = userService.findOne(user.getUsername());
         final String token = jwtTokenUtil.generateToken(u);
-        return ResponseEntity.ok(token);
+        return ResponseEntity.ok("Bearer "+token);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "signup")
+    public void signup(@RequestBody User user) {
+        userService.save(user);
     }
 }
