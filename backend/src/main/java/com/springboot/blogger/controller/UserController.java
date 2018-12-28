@@ -1,6 +1,9 @@
 package com.springboot.blogger.controller;
 
 import com.springboot.blogger.config.JwtTokenUtil;
+import com.springboot.blogger.model.ApiResponse;
+import com.springboot.blogger.model.AuthToken;
+import com.springboot.blogger.model.LoginUser;
 import com.springboot.blogger.model.User;
 import com.springboot.blogger.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,23 +29,17 @@ public class UserController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
-    @RequestMapping(value = "/generate-token", method = RequestMethod.POST)
-    public ResponseEntity register(@RequestBody User user) throws AuthenticationException {
+    @RequestMapping(method = RequestMethod.POST, value = "/login")
+    public ApiResponse<AuthToken> register(@RequestBody LoginUser loginUser) throws AuthenticationException {
 
-        final Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        user.getUsername(),
-                        user.getPassword()
-                )
-        );
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        final User u = userService.findOne(user.getUsername());
-        final String token = jwtTokenUtil.generateToken(u);
-        return ResponseEntity.ok("Bearer "+token);
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUser.getUsername(), loginUser.getPassword()));
+        final User user = userService.findOne(loginUser.getUsername());
+        final String token = jwtTokenUtil.generateToken(user);
+        return new ApiResponse<>(200, "success",new AuthToken(token, user.getUsername()));
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "signup")
-    public void signup(@RequestBody User user) {
+    @RequestMapping(method = RequestMethod.POST, value = "/register")
+    public void register(@RequestBody User user) {
         userService.save(user);
     }
 }

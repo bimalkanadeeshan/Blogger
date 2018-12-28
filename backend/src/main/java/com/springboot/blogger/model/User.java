@@ -1,12 +1,8 @@
 package com.springboot.blogger.model;
 
-import org.springframework.security.core.GrantedAuthority;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -74,26 +70,5 @@ public class User {
     public void setBlog(List<Blog> blog) {
         this.blog = blog;
     }
-/*
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-         return authorities;
-    }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-*/
 }
