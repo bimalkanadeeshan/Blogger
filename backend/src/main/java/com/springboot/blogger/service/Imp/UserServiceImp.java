@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service(value = "userService")
-public class UserServiceImp implements UserService {
+public class UserServiceImp implements UserDetailsService, UserService {
 
     @Autowired
     private UserRepository userRepository;
@@ -23,6 +23,13 @@ public class UserServiceImp implements UserService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username);
+        if(user == null){
+            throw new UsernameNotFoundException("Invalid username or password.");
+        }
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthority());
+    }
 
     private List<SimpleGrantedAuthority> getAuthority() {
         return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
