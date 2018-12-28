@@ -15,27 +15,27 @@ public class ReviewerController {
   @Autowired
   private ReviewerService reviewerService;
 
-  @RequestMapping("/reviewers")
+  @RequestMapping("/reviewer")
   public List<Reviewer> findAllReviewers() {
       return reviewerService.findAll();
   }
 
-  @RequestMapping("/reviewers/{id}")
+  @RequestMapping("/reviewer/{id}")
   public Optional<Reviewer> findReviewer(@PathVariable int id) {
       return reviewerService.findById(id);
   }
 
-  @RequestMapping(method=RequestMethod.POST,value="/reviewers")
+  @RequestMapping(method=RequestMethod.POST,value="/reviewer")
   public void saveReviewer(@RequestBody Reviewer reviewer){
       reviewerService.save(reviewer);
   }
 
-  @RequestMapping(method = RequestMethod.DELETE, value = "/reviewers/{id}")
+  @RequestMapping(method = RequestMethod.DELETE, value = "/reviewer/{id}")
   public void deleteReviewer(@PathVariable int id) {
       reviewerService.delete(id);
   }
 
-  @RequestMapping(method = RequestMethod.PUT, value = "/reviewers/{id}")
+  @RequestMapping(method = RequestMethod.PUT, value = "/reviewer/{id}")
   public void editReviewer(@RequestBody Reviewer reviewer, @PathVariable int id) {
       Reviewer r = reviewerService.findById(id).get();
       if(r != null) {
