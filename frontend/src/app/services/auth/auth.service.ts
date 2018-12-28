@@ -14,6 +14,6 @@ export class AuthService {
    public userLogin(user) {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:8080/api/login', user, {headers: headers});
+    return this.http.post('http://localhost:8080/api/user/login', user, {headers: headers});
    }
 }

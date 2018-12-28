@@ -11,7 +11,9 @@ export class LoginComponent implements OnInit {
   user: Object;
   email: String;
   password: String;
-  constructor() { 
+  data: any;
+
+  constructor(private auth: AuthService) { 
 
   }
 
@@ -20,6 +22,13 @@ export class LoginComponent implements OnInit {
 
   userLogin() {
     this.user = {name: this.email, password: this.password};
+    this.auth.userLogin(this.user)
+    .subscribe((val) => {
+      this.data = val;
+      if(this.data.message='success') {
+        console.log('ok');
+      }
+    });
   }
 
 }
