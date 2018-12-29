@@ -25,9 +25,7 @@ export class LoginComponent implements OnInit {
     this.auth.userLogin(this.user)
     .subscribe((val) => {
       this.data = val;
-      if(this.data.message='success') {
-        console.log('ok');
-      }
+      console.log(this.data);
     });
   }
 

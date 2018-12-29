@@ -12,7 +12,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api")
 public class UserController {
@@ -35,7 +35,7 @@ public class UserController {
         return new ApiResponse<>(200, "success",new AuthToken(token, user.getUsername()));
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/user/register")
+    @RequestMapping(method = RequestMethod.POST, value = "/register")
     public void register(@RequestBody User user) {
         userService.save(user);
     }
