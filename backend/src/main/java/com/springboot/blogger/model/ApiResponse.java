@@ -2,6 +2,9 @@ package com.springboot.blogger.model;
 
 public class ApiResponse<T> {
 
+    public ApiResponse() {
+    }
+
     private int status;
     private String message;
     private Object result;

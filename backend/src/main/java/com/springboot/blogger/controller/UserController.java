@@ -12,9 +12,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:8080")
+
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
     @Autowired
@@ -30,13 +31,17 @@ public class UserController {
     public ApiResponse<AuthToken> register(@RequestBody LoginUser loginUser) throws AuthenticationException {
 
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUser.getUsername(), loginUser.getPassword()));
-        final User user = userService.findOne(loginUser.getUsername());
-        final String token = jwtTokenUtil.generateToken(user);
+        User user = userService.findOne(loginUser.getUsername());
+        String token = jwtTokenUtil.generateToken(user);
         return new ApiResponse<>(200, "success",new AuthToken(token, user.getUsername()));
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/register")
-    public void register(@RequestBody User user) {
+    @RequestMapping(method = RequestMethod.POST, value = "/user/register")
+    public ApiResponse register(@RequestBody User user) {
+        if(userService.findOne(user.getUsername()).equals(user.getUsername())) {
+            return new ApiResponse(200, "success",new AuthToken("User Already exist",user.getUsername()));
+        }
         userService.save(user);
+        return new ApiResponse(200, "success",new AuthToken("User created",user.getUsername()));
     }
 }
