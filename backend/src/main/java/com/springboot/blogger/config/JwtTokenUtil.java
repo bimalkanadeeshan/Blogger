@@ -19,6 +19,18 @@ import static com.springboot.blogger.config.Constants.SIGNING_KEY;
 @Component
 public class JwtTokenUtil implements Serializable {
 
+    private Claims getAllClaimsFromToken(String token) {
+        return Jwts.parser()
+                .setSigningKey(SIGNING_KEY)
+                .parseClaimsJws(token)
+                .getBody();
+    }
+
+    public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
+        Claims claims = getAllClaimsFromToken(token);
+        return claimsResolver.apply(claims);
+    }
+
     public String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
     }
@@ -27,25 +39,9 @@ public class JwtTokenUtil implements Serializable {
         return getClaimFromToken(token, Claims::getExpiration);
     }
 
-    public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
-        final Claims claims = getAllClaimsFromToken(token);
-        return claimsResolver.apply(claims);
-    }
-
-    private Claims getAllClaimsFromToken(String token) {
-        return Jwts.parser()
-                .setSigningKey(SIGNING_KEY)
-                .parseClaimsJws(token)
-                .getBody();
-    }
-
     private Boolean isTokenExpired(String token) {
         final Date expiration = getExpirationDateFromToken(token);
         return expiration.before(new Date());
-    }
-
-    public String generateToken(User user) {
-        return doGenerateToken(user.getUsername());
     }
 
     private String doGenerateToken(String subject) {
@@ -62,10 +58,13 @@ public class JwtTokenUtil implements Serializable {
                 .compact();
     }
 
+    public String generateToken(User user) {
+        return doGenerateToken(user.getUsername());
+    }
+
     public Boolean validateToken(String token, UserDetails userDetails) {
-        final String username = getUsernameFromToken(token);
-        return (
-                username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+        String username = getUsernameFromToken(token);
+        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
 }
