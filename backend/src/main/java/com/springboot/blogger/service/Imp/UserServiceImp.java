@@ -38,7 +38,8 @@ public class UserServiceImp implements UserDetailsService, UserService {
 
     @Override
     public void save(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        User userNew = new User();
+        userNew.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
