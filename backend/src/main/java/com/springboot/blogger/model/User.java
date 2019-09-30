@@ -4,10 +4,22 @@ package com.springboot.blogger.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
 public class User {
+
+    public User() {
+    }
+
+    public User(String username, String name, String password,Set<Role> role) {
+        this.username = username;
+        this.name = name;
+        this.password = password;
+        this.role = role;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long uid;
@@ -22,14 +34,9 @@ public class User {
     @JsonIgnore
     private List<Blog> blog;
 
-    public User() {
-    }
-
-    public User(String username, String name, String password) {
-        this.username = username;
-        this.name = name;
-        this.password = password;
-    }
+    @ManyToMany
+    @JsonIgnore
+    private Set<Role> role;
 
     public Long getUid() {
         return uid;
@@ -71,4 +78,11 @@ public class User {
         this.blog = blog;
     }
 
+    public Set<Role> getRole() {
+        return role;
+    }
+
+    public void setRole(Set<Role> role) {
+        this.role = role;
+    }
 }

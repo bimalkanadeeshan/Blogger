@@ -7,7 +7,6 @@ import java.util.Optional;
 
 public interface BlogService {
     List<Blog> findAllBlogByUser(long uid);
-
     List<Blog> findAll();
     Optional<Blog> findOne(int bid);
     Blog save(Blog blog);
